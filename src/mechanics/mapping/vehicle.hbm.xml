@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="mechanics.domain.Vehicle"
+    table="mechanics_vehicle">
+
+        
+        <id
+            name="id"
+            column="id">
+            <generator class="increment"/>
+        </id>
+
+        <property name="plaque"
+                column="plaque"/>
+        
+        <property name="color"
+                column="color"/>
+
+        <property name="brand"
+                column="brand"/>
+
+        <property name="model"
+                column="model"/>
+
+        <property name="year"
+                column="year"/>
+
+        <property name="notes"
+                column="notes"/>
+
+         
+
+
+        <list name="services" table="mechanics_service">
+            <key column="vehicle_id"/>
+            <list-index column="position"/>
+
+
+            <composite-element class="mechanics.domain.Service">
+                <property name="description" column="description"/>
+                <property name="km" column="km"/>
+                <property name="createdAt" column="createdAt" type="date"/>
+                <many-to-one
+                    name="owner"
+                    column="owner_id"
+                    class="mechanics.domain.Person"
+                    />                    
+                
+
+            </composite-element>
+        </list>
+
+
+        <!--<set name="services"
+            inverse="true"
+            cascade="save-update">
+
+
+            <key column="vehicle_id"/>
+            <one-to-many class="mechanics.domain.Service"/>
+
+        </set> -->
+
+    </class>
+</hibernate-mapping>
