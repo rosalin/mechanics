@@ -11,6 +11,7 @@
 package mechanics.gui;
 
 import com.mchange.v2.log.log4j.Log4jMLog;
+import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,6 +29,7 @@ import mechanics.persistence.Dao;
 import mechanics.persistence.GenericDao;
 import mechanics.persistence.HibernateUtil;
 import mechanics.persistence.specialist.VehicleDao;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 /**
@@ -88,6 +90,7 @@ public class ManagerUi extends javax.swing.JFrame {
             jMenuItem1 = new javax.swing.JMenuItem();
 
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+            setTitle("ServControl");
 
             jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -143,7 +146,7 @@ public class ManagerUi extends javax.swing.JFrame {
 
             jLabel4.setText("Placa");
 
-            jButtonSearch.setText("Procurar");
+            jButtonSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mechanics/gui/icons/Search-icon.png"))); // NOI18N
             jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     jButtonSearchActionPerformed(evt);
@@ -163,20 +166,22 @@ public class ManagerUi extends javax.swing.JFrame {
                     .addComponent(jTextFieldPlaque, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jButtonSearch)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGap(18, 18, 18)
                     .addComponent(jLabelStatus)
-                    .addContainerGap(482, Short.MAX_VALUE))
+                    .addContainerGap(487, Short.MAX_VALUE))
             );
             jPanel3Layout.setVerticalGroup(
                 jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                    .addContainerGap(20, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
-                        .addComponent(jTextFieldPlaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonSearch)
-                        .addComponent(jLabelStatus))
-                    .addContainerGap())
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addContainerGap(32, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4)
+                                .addComponent(jTextFieldPlaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelStatus))
+                            .addContainerGap())
+                        .addComponent(jButtonSearch, javax.swing.GroupLayout.Alignment.TRAILING)))
             );
 
             jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Adcionar Serviço"));
@@ -366,12 +371,13 @@ public class ManagerUi extends javax.swing.JFrame {
             if (owner != null) {
                 jLabelOwner.setText(owner.getName());
                 jComboBoxPersons.setSelectedItem(owner);
-            }else
-            {
+            } else {
                 jLabelOwner.setText("Sem Registro");
             }
 
             session.close();
+            jTextFieldKm.requestFocus();
+            jTextFieldKm.setBackground(new Color(255, 177, 181));
 
             //JOptionPane.showMessageDialog(this, "Veículo com a placa " + plaque + " já está cadastrado");
         } else {
@@ -385,14 +391,14 @@ public class ManagerUi extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButtonaAddServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaAddServiceActionPerformed
-        if(vehicle == null){
+        if (vehicle == null) {
             JOptionPane.showMessageDialog(this, "Pesquise por uma placa para adcionar o serviço");
             return;
         }
 
         String km = jTextFieldKm.getText();
         String text = jTextAreaDescription.getText();
-        
+
         Date date = null;
         try {
             date = formatter.parse(jFormattedTextFieldDate.getText());
@@ -405,18 +411,33 @@ public class ManagerUi extends javax.swing.JFrame {
         service.setDescription(text);
         service.setVehicle(vehicle);
         service.setCreatedAt(date);
-        
 
 
-        Person person = (Person)jComboBoxPersons.getSelectedItem();
+
+        Person person = (Person) jComboBoxPersons.getSelectedItem();
         service.setOwner(person);
         vehicle.getServices().add(service);
 
 
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            Dao<Vehicle> dao = new GenericDao<Vehicle>(session, true, Vehicle.class);
+            dao.saveOrUpdate(vehicle);
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Dao<Vehicle> dao = new GenericDao<Vehicle>(session, true, Vehicle.class);
-        dao.saveOrUpdate(vehicle);
+            jTextFieldKm.setBackground(new Color(242,241,240));
+            jTextFieldKm.setText("");
+            jTextAreaDescription.setText("");
+            jTextFieldPlaque.requestFocus();
+
+            JOptionPane.showMessageDialog(this, "Serviço Cadastrado", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        } catch (HibernateException e) {
+            JOptionPane.showMessageDialog(this, "Houve um erro "+e.getMessage());
+        }
+
+     
+        
+
+
 
     }//GEN-LAST:event_jButtonaAddServiceActionPerformed
 
@@ -431,11 +452,7 @@ public class ManagerUi extends javax.swing.JFrame {
             }
         });
     }
-
-
-
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-
     private Vehicle vehicle = null;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonNewClient;

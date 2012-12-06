@@ -27,7 +27,8 @@ public class ServiceAbstractTable extends AbstractTableModel {
     }
 
     public Object getValueAt(int i, int i1) {
-        
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    
 }
