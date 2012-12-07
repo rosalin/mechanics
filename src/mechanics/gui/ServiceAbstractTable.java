@@ -31,6 +31,11 @@ public class ServiceAbstractTable extends AbstractTableModel {
         fireTableDataChanged();
     }
 
+    public void clear(){
+        services = new ArrayList<Service>(0);
+        fireTableDataChanged();
+    }
+
     public ArrayList<Service> getServices() {
         return services;
     }
@@ -68,5 +73,5 @@ public class ServiceAbstractTable extends AbstractTableModel {
         return getValueAt(0, columnIndex).getClass();
     }
 
-   
+  
 }

@@ -11,6 +11,7 @@
 package mechanics.gui;
 
 import com.mchange.v2.log.log4j.Log4jMLog;
+import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,10 +19,8 @@ import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.print.attribute.standard.Severity;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
-import mechanics.controllers.VehicleController;
 import mechanics.domain.Person;
 import mechanics.domain.Service;
 import mechanics.domain.Vehicle;
@@ -79,7 +78,6 @@ public class ManagerUi extends javax.swing.JFrame {
         jTextFieldKm = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jComboBoxPersons = new javax.swing.JComboBox();
-        jButtonNewClient = new javax.swing.JButton();
         jButtonaAddService = new javax.swing.JButton();
         try{
             MaskFormatter mf = new MaskFormatter("##/##/####");
@@ -91,6 +89,7 @@ public class ManagerUi extends javax.swing.JFrame {
             jMenuItem1 = new javax.swing.JMenuItem();
 
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+            setTitle("ServControl");
 
             jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -124,7 +123,7 @@ public class ManagerUi extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabelOwner, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(223, Short.MAX_VALUE))
+                    .addContainerGap(233, Short.MAX_VALUE))
             );
             jPanel2Layout.setVerticalGroup(
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,14 +145,13 @@ public class ManagerUi extends javax.swing.JFrame {
 
             jLabel4.setText("Placa");
 
-            jButtonSearch.setText("Procurar");
+            jButtonSearch.setBackground(new java.awt.Color(204, 204, 204));
+            jButtonSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mechanics/gui/icons/icon pesquisar.png"))); // NOI18N
             jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     jButtonSearchActionPerformed(evt);
                 }
             });
-
-            jLabelStatus.setText("Status");
 
             javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
             jPanel3.setLayout(jPanel3Layout);
@@ -166,20 +164,22 @@ public class ManagerUi extends javax.swing.JFrame {
                     .addComponent(jTextFieldPlaque, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jButtonSearch)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jLabelStatus)
-                    .addContainerGap(482, Short.MAX_VALUE))
+                    .addGap(18, 18, 18)
+                    .addComponent(jLabelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(385, Short.MAX_VALUE))
             );
             jPanel3Layout.setVerticalGroup(
                 jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                    .addContainerGap(20, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
-                        .addComponent(jTextFieldPlaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonSearch)
-                        .addComponent(jLabelStatus))
-                    .addContainerGap())
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addContainerGap(32, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4)
+                                .addComponent(jTextFieldPlaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addContainerGap())
+                        .addComponent(jButtonSearch, javax.swing.GroupLayout.Alignment.TRAILING)))
             );
 
             jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Adcionar Serviço"));
@@ -198,8 +198,6 @@ public class ManagerUi extends javax.swing.JFrame {
 
             jComboBoxPersons.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o proprietário atual" }));
 
-            jButtonNewClient.setText("Novo");
-
             javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
             jPanel5.setLayout(jPanel5Layout);
             jPanel5Layout.setHorizontalGroup(
@@ -212,9 +210,7 @@ public class ManagerUi extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jComboBoxPersons, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                    .addComponent(jButtonNewClient, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, 0))
+                    .addContainerGap(79, Short.MAX_VALUE))
             );
             jPanel5Layout.setVerticalGroup(
                 jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,12 +219,12 @@ public class ManagerUi extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel9)
                         .addComponent(jTextFieldKm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonNewClient)
                         .addComponent(jLabel10)
                         .addComponent(jComboBoxPersons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(19, Short.MAX_VALUE))
             );
 
+            jButtonaAddService.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mechanics/gui/icons/add.png"))); // NOI18N
             jButtonaAddService.setText("Adcionar Serviço");
             jButtonaAddService.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -256,9 +252,9 @@ public class ManagerUi extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1))))
-                .addContainerGap(181, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,7 +275,7 @@ public class ManagerUi extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(jButtonaAddService, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -353,19 +349,19 @@ public class ManagerUi extends javax.swing.JFrame {
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
         //VehicleController vehicleController = new VehicleController();
         //vehicleController.setUi(this);
-
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             String plaque = jTextFieldPlaque.getText();
-            Session session = HibernateUtil.getSessionFactory().openSession();
+            
             VehicleDao dao = new VehicleDao(session, false);
 
             boolean status = Vehicle.isExists(plaque);
             if (status) {
                 jLabelStatus.setText("Veículo Encontrado");
 
-
                 Dao<Person> genericDao = new GenericDao<Person>(session, false, Person.class);
                 List<Person> list = genericDao.all();
+                list = Person.patchList(list);
                 Vector vector = new Vector(list);
 
                 jComboBoxPersons.setModel(new javax.swing.DefaultComboBoxModel(vector));
@@ -375,6 +371,7 @@ public class ManagerUi extends javax.swing.JFrame {
                 jTextFieldModel.setText(vehicle.getModel());
                 Person owner = vehicle.getCurrentOwner();
 
+
                 if (owner != null) {
                     jLabelOwner.setText(owner.getName());
                     jComboBoxPersons.setSelectedItem(owner);
@@ -382,7 +379,9 @@ public class ManagerUi extends javax.swing.JFrame {
                     jLabelOwner.setText("Sem Registro");
                 }
 
-                session.close();
+                jTextFieldKm.requestFocus();
+                jTextFieldKm.setBackground(new Color(255, 177, 181));
+
 
                 //JOptionPane.showMessageDialog(this, "Veículo com a placa " + plaque + " já está cadastrado");
             } else {
@@ -390,9 +389,11 @@ public class ManagerUi extends javax.swing.JFrame {
             }
 
         } catch (HibernateException e) {
-            JOptionPane.showMessageDialog(this, "Ocoreu um erro inesperado! "+ e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Ocoreu um erro inesperado! " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }finally{
+            if(session.isOpen())
+                session.close();
         }
-        
 
     }//GEN-LAST:event_jButtonSearchActionPerformed
 
@@ -403,7 +404,7 @@ public class ManagerUi extends javax.swing.JFrame {
 
     private void jButtonaAddServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaAddServiceActionPerformed
         if (vehicle == null) {
-            JOptionPane.showMessageDialog(this, "Pesquise por uma placa para adcionar o serviço");
+            JOptionPane.showMessageDialog(this, "Pesquise por uma placa para adicionar o serviço");
             return;
         }
 
@@ -424,21 +425,37 @@ public class ManagerUi extends javax.swing.JFrame {
         service.setCreatedAt(date);
 
 
-
         Person person = (Person) jComboBoxPersons.getSelectedItem();
         service.setOwner(person);
         vehicle.getServices().add(service);
 
 
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            Dao<Vehicle> dao = new GenericDao<Vehicle>(session, true, Vehicle.class);
+            dao.saveOrUpdate(vehicle);
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Dao<Vehicle> dao = new GenericDao<Vehicle>(session, true, Vehicle.class);
-        dao.saveOrUpdate(vehicle);
+            jTextFieldKm.setBackground(new Color(242, 241, 240));
+            jTextFieldKm.setText("");
+            jTextAreaDescription.setText("");
+            jTextFieldPlaque.requestFocus();
+
+            JOptionPane.showMessageDialog(this, "Serviço Cadastrado", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        } catch (HibernateException e) {
+            JOptionPane.showMessageDialog(this, "Houve um erro " + e.getMessage());
+            e.printStackTrace();
+        }
+
+
+
+
+
 
     }//GEN-LAST:event_jButtonaAddServiceActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
+        VehicleEditUi editUi = new VehicleEditUi(this, true);
+        editUi.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
@@ -455,7 +472,6 @@ public class ManagerUi extends javax.swing.JFrame {
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     private Vehicle vehicle = null;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonNewClient;
     private javax.swing.JButton jButtonSearch;
     private javax.swing.JButton jButtonaAddService;
     private javax.swing.JComboBox jComboBoxPersons;

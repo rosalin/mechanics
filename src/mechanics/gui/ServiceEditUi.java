@@ -11,10 +11,14 @@
 package mechanics.gui;
 
 import com.mchange.v2.log.log4j.Log4jMLog;
+import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 import mechanics.domain.Person;
@@ -23,6 +27,7 @@ import mechanics.domain.Vehicle;
 import mechanics.persistence.Dao;
 import mechanics.persistence.GenericDao;
 import mechanics.persistence.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 /**
@@ -35,7 +40,6 @@ public class ServiceEditUi extends javax.swing.JDialog {
     public ServiceEditUi(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
     }
 
     /** Creates new form ServiceEditUi */
@@ -43,16 +47,18 @@ public class ServiceEditUi extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.service = service;
-
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Dao<Person> genericDao = new GenericDao<Person>(session, false, Person.class);
-        List<Person> list = genericDao.all();
-        Vector vector = new Vector(list);
-        //inicializa combo_box
-        jComboBoxPersons.setModel(new javax.swing.DefaultComboBoxModel(vector));
-
-
+  
         initDisplay();
+
+
+        if (service != null) {
+            Person o = service.getOwner();
+            if (o != null) {
+                jComboBoxPersons.addItem(o);
+            } else {
+                System.out.println("NULLOOOOOOOOOOOOOOOO");
+            }
+        }
     }
 
     private void initDisplay() {
@@ -62,11 +68,12 @@ public class ServiceEditUi extends javax.swing.JDialog {
 
         String km = String.valueOf(service.getKm());
 
-        if(km!=null)
-          jTextFieldKm.setText(String.valueOf(service.getKm()));
+        if (km != null) {
+            jTextFieldKm.setText(String.valueOf(service.getKm()));
+        }
 
 
-        jComboBoxPersons.setSelectedItem(service.getOwner());
+
         jFormattedTextFieldDate.setText(formatter.format(service.getCreatedAt()));
 
         Vehicle vehicle = service.getVehicle();
@@ -78,13 +85,12 @@ public class ServiceEditUi extends javax.swing.JDialog {
             jTextFieldPlaque.setText(vehicle.getPlaque());
             jFormattedTextFieldYear1.setText(vehicle.getYear().substring(0, 5));
             jFormattedTextFieldYear2.setText(vehicle.getYear().substring(7, 11));
-            JOptionPane.showMessageDialog(this, "VALOR ANO: " + vehicle.getYear());
 
             Person person = vehicle.getCurrentOwner();
             if (person != null) {
                 jTextFieldOwner.setText(person.getName());
             }
-        }else{
+        } else {
             System.out.println("NULLLLL");
         }
 
@@ -114,8 +120,8 @@ public class ServiceEditUi extends javax.swing.JDialog {
         try{
             MaskFormatter mfDate = new MaskFormatter("##/##/####");
             jFormattedTextFieldDate = new javax.swing.JFormattedTextField(mfDate);
-            jButtonaAddService = new javax.swing.JButton();
-            jButtonaAddService1 = new javax.swing.JButton();
+            jButtonaEdit = new javax.swing.JButton();
+            jButtonaSave = new javax.swing.JButton();
             jPanel4 = new javax.swing.JPanel();
             jLabel2 = new javax.swing.JLabel();
             jLabel1 = new javax.swing.JLabel();
@@ -136,6 +142,11 @@ public class ServiceEditUi extends javax.swing.JDialog {
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
                 setTitle("Serviço");
+                addWindowListener(new java.awt.event.WindowAdapter() {
+                    public void windowOpened(java.awt.event.WindowEvent evt) {
+                        formWindowOpened(evt);
+                    }
+                });
 
                 jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Serviço"));
 
@@ -151,8 +162,6 @@ public class ServiceEditUi extends javax.swing.JDialog {
                 jTextFieldKm.setEditable(false);
 
                 jLabel10.setText("Proprietário:");
-
-                jComboBoxPersons.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione o proprietário atual" }));
 
                 jLabel8.setText("Data:");
 
@@ -196,18 +205,18 @@ public class ServiceEditUi extends javax.swing.JDialog {
                     .addContainerGap())
             );
 
-            jButtonaAddService.setText("Editar");
-            jButtonaAddService.addActionListener(new java.awt.event.ActionListener() {
+            jButtonaEdit.setText("Editar");
+            jButtonaEdit.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButtonaAddServiceActionPerformed(evt);
+                    jButtonaEditActionPerformed(evt);
                 }
             });
 
-            jButtonaAddService1.setText("Salvar");
-            jButtonaAddService1.setEnabled(false);
-            jButtonaAddService1.addActionListener(new java.awt.event.ActionListener() {
+            jButtonaSave.setText("Salvar");
+            jButtonaSave.setEnabled(false);
+            jButtonaSave.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButtonaAddService1ActionPerformed(evt);
+                    jButtonaSaveActionPerformed(evt);
                 }
             });
 
@@ -218,13 +227,13 @@ public class ServiceEditUi extends javax.swing.JDialog {
                 .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addGap(22, 22, 22)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel6)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                                .addComponent(jButtonaAddService, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(680, 680, 680)
-                                .addComponent(jButtonaAddService1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addComponent(jButtonaEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 680, Short.MAX_VALUE)
+                                .addComponent(jButtonaSave, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 858, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGap(23, 23, 23))
             );
@@ -237,10 +246,10 @@ public class ServiceEditUi extends javax.swing.JDialog {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButtonaAddService, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonaAddService1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(13, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButtonaSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonaEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addContainerGap(42, Short.MAX_VALUE))
             );
 
             javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -255,9 +264,8 @@ public class ServiceEditUi extends javax.swing.JDialog {
             jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(169, Short.MAX_VALUE))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             );
 
             jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Dados do Veículo"));
@@ -382,31 +390,84 @@ public class ServiceEditUi extends javax.swing.JDialog {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(102, Short.MAX_VALUE)))
+                    .addContainerGap(271, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonaSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaSaveActionPerformed
 
-    private void jButtonaAddService1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaAddService1ActionPerformed
-     
-    }//GEN-LAST:event_jButtonaAddService1ActionPerformed
+        try {
+            Date date = formatter.parse(jFormattedTextFieldDate.getText());
+            String km = jTextFieldKm.getText();
+            String desc = jTextAreaDescription.getText();
+            Person person = (Person) jComboBoxPersons.getSelectedItem();
 
-    private void jButtonaAddServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaAddServiceActionPerformed
+            service.setCreatedAt(date);
+
+            long kmConverted = Long.valueOf(km);
+
+            service.setKm(kmConverted);
+            service.setDescription(desc);
+            service.setOwner(person);
+
+
+            Session session = HibernateUtil.getCurrentSession();
+            if (!session.isOpen()) {
+                session = HibernateUtil.getSessionFactory().openSession();
+                HibernateUtil.setCurrentSession(session);
+            }
+
+            Dao<Vehicle> dao = new GenericDao<Vehicle>(session, false, Vehicle.class);
+            dao.saveOrUpdate(service.getVehicle());
+
+        } catch (ParseException ex) {
+            Logger.getLogger(ServiceEditUi.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (HibernateException e) {
+            JOptionPane.showMessageDialog(this, "Occoreu um erro inesperado! " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_jButtonaSaveActionPerformed
+
+    private void jButtonaEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaEditActionPerformed
         jTextFieldKm.requestFocus();
         jTextAreaDescription.setEditable(true);
         jTextFieldKm.setEditable(true);
         jComboBoxPersons.setEditable(true);
         jFormattedTextFieldDate.setEditable(true);
-        jButtonaAddService1.setEnabled(true);
-        jButtonaAddService.setEnabled(false);
-    }//GEN-LAST:event_jButtonaAddServiceActionPerformed
+        jButtonaSave.setEnabled(true);
+        jButtonaEdit.setEnabled(false);
 
+         Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+          
+            Dao<Person> genericDao = new GenericDao<Person>(session, false, Person.class);
+            List<Person> list = genericDao.all();
+            list = Person.patchList(list);
+            Vector vector = new Vector(list);
+            //inicializa combo_box
+            jComboBoxPersons.setModel(new javax.swing.DefaultComboBoxModel(vector));
+            jComboBoxPersons.setSelectedItem(service.getOwner());
+        }catch(HibernateException e){
+            JOptionPane.showMessageDialog(this, "Ocorreu um problema inesperado " + e.getMessage());
+            e.printStackTrace();
+        }
+        finally{
+            session.close();
+        }
+
+
+    }//GEN-LAST:event_jButtonaEditActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+    }//GEN-LAST:event_formWindowOpened
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
@@ -415,17 +476,24 @@ public class ServiceEditUi extends javax.swing.JDialog {
 
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
+
+
                     }
                 });
                 dialog.setVisible(true);
+
+
             }
         });
+
+
     }
     private Service service = null;
+  
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonaAddService;
-    private javax.swing.JButton jButtonaAddService1;
+    private javax.swing.JButton jButtonaEdit;
+    private javax.swing.JButton jButtonaSave;
     private javax.swing.JComboBox jComboBoxPersons;
     private javax.swing.JFormattedTextField jFormattedTextFieldDate;
     private javax.swing.JFormattedTextField jFormattedTextFieldYear1;

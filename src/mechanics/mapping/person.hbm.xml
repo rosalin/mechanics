@@ -4,13 +4,14 @@
     <class name="mechanics.domain.Person"
          table="person">
       
-      <id name="id"
+        <id name="id"
           column="id">
               
-      </id>
+        </id>
 
-      <property name="name"
+        <property name="name"
                 column="name"/>
+
 
     </class>
 </hibernate-mapping>

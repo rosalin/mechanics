@@ -5,6 +5,9 @@
 package mechanics.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,4 +41,27 @@ public class Person {
     public String toString() {
         return this.name;
     }
+
+
+    public static List patchList(List<Person> list){
+       int i;
+       List<Person> newList = new ArrayList<Person>(0);
+
+       for (i=0; i<list.size(); i++)
+       {
+           //JOptionPane.showMessageDialog(null, list.get(i));
+           Person object = (Person) list.get(i);
+           long id = object.getId();
+           if ((id > 8)){
+               newList.add(object);
+           }
+                           
+       }
+
+       return newList;
+    }
+
+
+
+
 }
