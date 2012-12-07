@@ -78,7 +78,6 @@ public class VehicleEditUi extends javax.swing.JDialog {
             jScrollPane1 = new javax.swing.JScrollPane();
             jTextAreaNotes = new javax.swing.JTextArea();
             jLabel6 = new javax.swing.JLabel();
-            jPanel3 = new javax.swing.JPanel();
 
             setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
             setTitle("Mecanica - Cadastro");
@@ -122,19 +121,19 @@ public class VehicleEditUi extends javax.swing.JDialog {
                     .addComponent(jLabel1))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldModel, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                    .addComponent(jTextFieldModel, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jFormattedTextFieldYear1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(jLabel4)
                         .addGap(10, 10, 10)
                         .addComponent(jFormattedTextFieldYear2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextFieldColor, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
-                    .addComponent(jTextFieldBrand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                    .addComponent(jTextFieldColor, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                    .addComponent(jTextFieldBrand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jTextFieldPlaque, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)))
+                        .addComponent(jButtonSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)))
                 .addGap(260, 260, 260))
         );
         jPanel4Layout.setVerticalGroup(
@@ -183,7 +182,7 @@ public class VehicleEditUi extends javax.swing.JDialog {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jLabel6)
                 .addContainerGap())
@@ -193,7 +192,7 @@ public class VehicleEditUi extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jLabel6)
                 .addGap(7, 7, 7)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -226,19 +225,6 @@ public class VehicleEditUi extends javax.swing.JDialog {
         );
 
         jTabbedPane1.addTab("Veiculo", jPanel2);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 614, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 476, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Serviços", jPanel3);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -275,17 +261,16 @@ public class VehicleEditUi extends javax.swing.JDialog {
         } catch (Exception ex) {
             Logger.getLogger(VehicleEditUi.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButtonOkActionPerformed
+}//GEN-LAST:event_jButtonOkActionPerformed
 
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
-       String plaque = jTextFieldPlaque.getText();
-       boolean status = Vehicle.isExists(plaque);
-       if(status){
-           JOptionPane.showMessageDialog(this, "Veículo com a placa " + plaque + " já está cadastrado");
-       }else{
-           JOptionPane.showMessageDialog(this, "Veículo nao encontrado");
-       }
-
+        String plaque = jTextFieldPlaque.getText();
+        boolean status = Vehicle.isExists(plaque);
+        if(status){
+            JOptionPane.showMessageDialog(this, "Veículo com a placa " + plaque + " já está cadastrado");
+        }else{
+            JOptionPane.showMessageDialog(this, "Veículo nao encontrado");
+        }
     }//GEN-LAST:event_jButtonSearchActionPerformed
 
     /**
@@ -321,7 +306,6 @@ public class VehicleEditUi extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
@@ -406,15 +390,7 @@ public class VehicleEditUi extends javax.swing.JDialog {
         this.jPanel2 = jPanel2;
     }
 
-    public JPanel getjPanel3() {
-        return jPanel3;
-    }
-
-    public void setjPanel3(JPanel jPanel3) {
-        this.jPanel3 = jPanel3;
-    }
-
-    public JPanel getjPanel4() {
+     public JPanel getjPanel4() {
         return jPanel4;
     }
 

@@ -26,8 +26,47 @@ public class ServiceAbstractTable extends AbstractTableModel {
         return columns.length;
     }
 
-    public Object getValueAt(int i, int i1) {
-        
+    public void add(Service service){
+        services.add(service);
+        fireTableDataChanged();
     }
 
+    public ArrayList<Service> getServices() {
+        return services;
+    }
+
+    
+
+    
+
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        Service service = (Service) services.get(rowIndex);
+        
+        switch(columnIndex){
+            case 0:
+                return service.getCreatedAt();
+            case 1:
+                return service.getDescription();
+            case 2:
+                return service.getKm();
+            case 3:
+                return service.getOwner().getName();
+            default:
+                return null;
+        }
+
+    }
+
+
+    @Override
+     public String getColumnName(int column) {
+        return columns[column];
+     }
+
+   @Override
+     public Class getColumnClass(int columnIndex) {
+        return getValueAt(0, columnIndex).getClass();
+    }
+
+   
 }

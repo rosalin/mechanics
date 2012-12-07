@@ -6,6 +6,7 @@
 package mechanics.persistence;
 
 
+import org.hibernate.Session;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
 
@@ -16,6 +17,7 @@ import org.hibernate.SessionFactory;
  */
 public class HibernateUtil {
     private static final SessionFactory sessionFactory;
+    private static Session session;
 
     static {
         try {
@@ -33,4 +35,13 @@ public class HibernateUtil {
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
+
+    public static Session getCurrentSession(){
+        return HibernateUtil.session;
+    }
+
+    public static void setCurrentSession(Session session){
+        HibernateUtil.session = session;
+    }
+
 }

@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.attribute.standard.Severity;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 import mechanics.controllers.VehicleController;
@@ -28,6 +29,7 @@ import mechanics.persistence.Dao;
 import mechanics.persistence.GenericDao;
 import mechanics.persistence.HibernateUtil;
 import mechanics.persistence.specialist.VehicleDao;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 /**
@@ -85,6 +87,7 @@ public class ManagerUi extends javax.swing.JFrame {
             jLabel7 = new javax.swing.JLabel();
             jMenuBar1 = new javax.swing.JMenuBar();
             jMenu1 = new javax.swing.JMenu();
+            jMenuItem2 = new javax.swing.JMenuItem();
             jMenuItem1 = new javax.swing.JMenuItem();
 
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -121,7 +124,7 @@ public class ManagerUi extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabelOwner, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(209, Short.MAX_VALUE))
+                    .addContainerGap(223, Short.MAX_VALUE))
             );
             jPanel2Layout.setVerticalGroup(
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,7 +258,7 @@ public class ManagerUi extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane1))))
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -313,7 +316,15 @@ public class ManagerUi extends javax.swing.JFrame {
 
         jMenu1.setText("Arquivo");
 
-        jMenuItem1.setText("Veiculos");
+        jMenuItem2.setText("Veiculos");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem1.setText("Serviços");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -343,56 +354,62 @@ public class ManagerUi extends javax.swing.JFrame {
         //VehicleController vehicleController = new VehicleController();
         //vehicleController.setUi(this);
 
-        String plaque = jTextFieldPlaque.getText();
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        VehicleDao dao = new VehicleDao(session, false);
+        try {
+            String plaque = jTextFieldPlaque.getText();
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            VehicleDao dao = new VehicleDao(session, false);
 
-        boolean status = Vehicle.isExists(plaque);
-        if (status) {
-            jLabelStatus.setText("Veículo Encontrado");
+            boolean status = Vehicle.isExists(plaque);
+            if (status) {
+                jLabelStatus.setText("Veículo Encontrado");
 
 
-            Dao<Person> genericDao = new GenericDao<Person>(session, false, Person.class);
-            List<Person> list = genericDao.all();
-            Vector vector = new Vector(list);
+                Dao<Person> genericDao = new GenericDao<Person>(session, false, Person.class);
+                List<Person> list = genericDao.all();
+                Vector vector = new Vector(list);
 
-            jComboBoxPersons.setModel(new javax.swing.DefaultComboBoxModel(vector));
+                jComboBoxPersons.setModel(new javax.swing.DefaultComboBoxModel(vector));
 
-            vehicle = dao.getVehiclePerPlaque(plaque);
-            jTextFieldBrand.setText(vehicle.getBrand());
-            jTextFieldModel.setText(vehicle.getModel());
-            Person owner = vehicle.getCurrentOwner();
+                vehicle = dao.getVehiclePerPlaque(plaque);
+                jTextFieldBrand.setText(vehicle.getBrand());
+                jTextFieldModel.setText(vehicle.getModel());
+                Person owner = vehicle.getCurrentOwner();
 
-            if (owner != null) {
-                jLabelOwner.setText(owner.getName());
-                jComboBoxPersons.setSelectedItem(owner);
-            }else
-            {
-                jLabelOwner.setText("Sem Registro");
+                if (owner != null) {
+                    jLabelOwner.setText(owner.getName());
+                    jComboBoxPersons.setSelectedItem(owner);
+                } else {
+                    jLabelOwner.setText("Sem Registro");
+                }
+
+                session.close();
+
+                //JOptionPane.showMessageDialog(this, "Veículo com a placa " + plaque + " já está cadastrado");
+            } else {
+                JOptionPane.showMessageDialog(this, "Veículo nao encontrado");
             }
 
-            session.close();
-
-            //JOptionPane.showMessageDialog(this, "Veículo com a placa " + plaque + " já está cadastrado");
-        } else {
-            JOptionPane.showMessageDialog(this, "Veículo nao encontrado");
+        } catch (HibernateException e) {
+            JOptionPane.showMessageDialog(this, "Ocoreu um erro inesperado! "+ e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
+        
+
     }//GEN-LAST:event_jButtonSearchActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        VehicleEditUi managervehicle = new VehicleEditUi(this, false);
-        managervehicle.setVisible(true);
+        ServiceSearch serviceSearch = new ServiceSearch(this, false);
+        serviceSearch.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButtonaAddServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaAddServiceActionPerformed
-        if(vehicle == null){
+        if (vehicle == null) {
             JOptionPane.showMessageDialog(this, "Pesquise por uma placa para adcionar o serviço");
             return;
         }
 
         String km = jTextFieldKm.getText();
         String text = jTextAreaDescription.getText();
-        
+
         Date date = null;
         try {
             date = formatter.parse(jFormattedTextFieldDate.getText());
@@ -405,10 +422,10 @@ public class ManagerUi extends javax.swing.JFrame {
         service.setDescription(text);
         service.setVehicle(vehicle);
         service.setCreatedAt(date);
-        
 
 
-        Person person = (Person)jComboBoxPersons.getSelectedItem();
+
+        Person person = (Person) jComboBoxPersons.getSelectedItem();
         service.setOwner(person);
         vehicle.getServices().add(service);
 
@@ -419,6 +436,10 @@ public class ManagerUi extends javax.swing.JFrame {
         dao.saveOrUpdate(vehicle);
 
     }//GEN-LAST:event_jButtonaAddServiceActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -431,11 +452,7 @@ public class ManagerUi extends javax.swing.JFrame {
             }
         });
     }
-
-
-
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-
     private Vehicle vehicle = null;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonNewClient;
@@ -457,6 +474,7 @@ public class ManagerUi extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
