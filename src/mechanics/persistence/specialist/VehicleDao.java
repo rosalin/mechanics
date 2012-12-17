@@ -32,14 +32,12 @@ public class VehicleDao {
             Query q = session.createQuery(hql);
             List list = q.list();
 
-            Vehicle v = (Vehicle) list.get(0);
-            if (v != null) {
-                return v;
+            if (list.size()>0) {
+                Vehicle v = (Vehicle) list.get(0);
+                if (v != null) {
+                    return v;
+                }
             }
-
-
-
-
 
         } catch (HibernateException e) {
             e.printStackTrace();

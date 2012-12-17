@@ -45,7 +45,7 @@
                     name="owner"
                     column="owner_id"
                     class="mechanics.domain.Person"
-                    />                    
+                    />
                 
 
             </composite-element>

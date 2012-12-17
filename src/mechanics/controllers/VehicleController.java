@@ -73,6 +73,7 @@ public class VehicleController {
         }catch(HibernateException e){
             JOptionPane.showMessageDialog(this.ui, "Houve um erro na hora de salvar: \n"+e.getMessage());
         }
+       
 
 
     }
