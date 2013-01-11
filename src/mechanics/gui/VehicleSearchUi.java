@@ -128,7 +128,7 @@ public class VehicleSearchUi extends javax.swing.JDialog {
     /**
     * @param args the command line arguments
     */
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 VehicleSearchUi dialog = new VehicleSearchUi(new javax.swing.JFrame(), true);
@@ -140,7 +140,7 @@ public class VehicleSearchUi extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
