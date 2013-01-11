@@ -27,7 +27,7 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
         
@@ -38,5 +38,5 @@ public class Main {
 
         System.out.println(v.getId());
         System.out.println(v.getServices().get(0).getOwner());
-    }
+    }*/
 }

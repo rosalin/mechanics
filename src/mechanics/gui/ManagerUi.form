@@ -143,7 +143,7 @@
                               <Component id="jLabelOwner" min="-2" pref="568" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="233" max="32767" attributes="0"/>
+                      <EmptySpace pref="239" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -214,7 +214,7 @@
                       <Component id="jButtonSearch" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="jLabelStatus" min="-2" pref="156" max="-2" attributes="0"/>
-                      <EmptySpace pref="385" max="32767" attributes="0"/>
+                      <EmptySpace pref="420" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

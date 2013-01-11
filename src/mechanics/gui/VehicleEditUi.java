@@ -276,7 +276,7 @@ public class VehicleEditUi extends javax.swing.JDialog {
     /**
     * @param args the command line arguments
     */
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 VehicleEditUi dialog = new VehicleEditUi(new javax.swing.JFrame(), true);
@@ -288,7 +288,7 @@ public class VehicleEditUi extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
-    }
+    }*/
 
 
     private VehicleController vehicleController;
