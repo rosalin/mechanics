@@ -13,6 +13,7 @@ import mechanics.persistence.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+
 /**
  *
  * @author rodrigo
