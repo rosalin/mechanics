@@ -39,7 +39,6 @@ public class Vehicle {
         this.year = year;
         this.notes = notes;
         this.brand = brand;
-
     }
 
     public Long getId() {

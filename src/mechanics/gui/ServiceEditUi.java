@@ -163,6 +163,12 @@ public class ServiceEditUi extends javax.swing.JDialog {
 
                 jLabel10.setText("Proprietário:");
 
+                jComboBoxPersons.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jComboBoxPersonsActionPerformed(evt);
+                    }
+                });
+
                 jLabel8.setText("Data:");
 
             }catch(ParseException e){
@@ -458,12 +464,14 @@ public class ServiceEditUi extends javax.swing.JDialog {
         finally{
             session.close();
         }
-
-
     }//GEN-LAST:event_jButtonaEditActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
     }//GEN-LAST:event_formWindowOpened
+
+    private void jComboBoxPersonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPersonsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxPersonsActionPerformed
     /**
      * @param args the command line arguments
      */
