@@ -12,6 +12,7 @@ package mechanics.gui;
 
 import com.mchange.v2.log.log4j.Log4jMLog;
 import java.awt.Color;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -81,10 +82,12 @@ public class ManagerUi extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jComboBoxPersons = new javax.swing.JComboBox();
         jButtonUpdateClients = new javax.swing.JButton();
-        jButtonaAddService = new javax.swing.JButton();
         try{
             MaskFormatter mf = new MaskFormatter("##/##/####");
             jFormattedTextFieldDate = new javax.swing.JFormattedTextField(mf);
+            jButtonaAddService = new javax.swing.JButton();
+            jLabel8 = new javax.swing.JLabel();
+            jTextFieldPrice = new javax.swing.JTextField();
             jLabel7 = new javax.swing.JLabel();
             jMenuBar1 = new javax.swing.JMenuBar();
             jMenu1 = new javax.swing.JMenu();
@@ -191,9 +194,9 @@ public class ManagerUi extends javax.swing.JFrame {
             jTextAreaDescription.setRows(5);
             jScrollPane1.setViewportView(jTextAreaDescription);
 
-            jLabel5.setText("Serviços Realizados");
+            jLabel5.setText("Serviços Realizados:");
 
-            jLabel6.setText("Data");
+            jLabel6.setText("Data:");
 
             jLabel9.setText("Km Atual:");
 
@@ -237,58 +240,68 @@ public class ManagerUi extends javax.swing.JFrame {
                     .addContainerGap(19, Short.MAX_VALUE))
             );
 
-            jButtonaAddService.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mechanics/gui/icons/add.png"))); // NOI18N
-            jButtonaAddService.setText("Adicionar Serviço");
-            jButtonaAddService.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButtonaAddServiceActionPerformed(evt);
-                }
-            });
-
         }catch(ParseException e){
             Log4jMLog.info(e.getMessage());
         }
+
+        jButtonaAddService.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mechanics/gui/icons/add.png"))); // NOI18N
+        jButtonaAddService.setText("Adicionar Serviço");
+        jButtonaAddService.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonaAddServiceActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Preço:");
+
+        jTextFieldPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPriceActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonaAddService))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5)
                             .addComponent(jScrollPane1)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(244, Short.MAX_VALUE))
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonaAddService, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldPrice)
+                            .addComponent(jFormattedTextFieldDate, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jFormattedTextFieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jButtonaAddService, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jFormattedTextFieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jTextFieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(jButtonaAddService, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -306,7 +319,9 @@ public class ManagerUi extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(183, 183, 183)))
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -353,7 +368,9 @@ public class ManagerUi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -425,6 +442,7 @@ public class ManagerUi extends javax.swing.JFrame {
 
         String km = jTextFieldKm.getText();
         String text = jTextAreaDescription.getText();
+        String price = jTextFieldPrice.getText();
 
         Date date = null;
         try {
@@ -438,6 +456,7 @@ public class ManagerUi extends javax.swing.JFrame {
         service.setDescription(text);
         service.setVehicle(vehicle);
         service.setCreatedAt(date);
+        service.setPrice(Double.valueOf(price));
 
 
         Person person = (Person) jComboBoxPersons.getSelectedItem();
@@ -483,6 +502,10 @@ public class ManagerUi extends javax.swing.JFrame {
         session.close();
     }//GEN-LAST:event_jButtonUpdateClientsActionPerformed
 
+    private void jTextFieldPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPriceActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -510,6 +533,7 @@ public class ManagerUi extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelOwner;
     private javax.swing.JLabel jLabelStatus;
@@ -528,5 +552,6 @@ public class ManagerUi extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldKm;
     private javax.swing.JTextField jTextFieldModel;
     private javax.swing.JTextField jTextFieldPlaque;
+    private javax.swing.JTextField jTextFieldPrice;
     // End of variables declaration//GEN-END:variables
 }

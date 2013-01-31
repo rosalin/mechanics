@@ -6,6 +6,7 @@
 package mechanics;
 
 import java.io.Serializable;
+import java.security.Provider.Service;
 import java.util.ArrayList;
 import java.util.List;
 import mechanics.domain.Person;
@@ -27,16 +28,12 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
         
-        Dao<Vehicle> dao = new GenericDao<Vehicle>(session, false, Vehicle.class);
-        Vehicle v = dao.find(new Long(11));
-
-
-
-        System.out.println(v.getId());
-        System.out.println(v.getServices().get(0).getOwner());
-    }*/
+        Dao<Service> dao = new GenericDao<Service>(session, false, Service.class);
+        List<Service> s = dao.all();
+        System.out.println("TESTE = " + s.size());
+    }
 }

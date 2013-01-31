@@ -23,6 +23,8 @@ import javax.swing.event.ListSelectionListener;
 import mechanics.domain.Person;
 import mechanics.domain.Service;
 import mechanics.domain.Vehicle;
+import mechanics.persistence.Dao;
+import mechanics.persistence.GenericDao;
 import mechanics.persistence.HibernateUtil;
 import mechanics.persistence.specialist.VehicleDao;
 import org.hibernate.HibernateException;
@@ -203,31 +205,44 @@ public class ServiceSearch extends javax.swing.JDialog {
         service.setOwner(p);
 
         abstractTable.add(service);*/
-
+        int i, j;
         abstractTable.clear();
         Session session = HibernateUtil.getSessionFactory().openSession();
-        HibernateUtil.setCurrentSession(session); 
+        //HibernateUtil.setCurrentSession(session);
 
         try {
             String plaque = jTextFieldPlaque.getText();
-            VehicleDao dao = new VehicleDao(session, false);
-            Vehicle v = dao.getVehiclePerPlaque(plaque);
+            if (plaque.equals("")){
+                List<Service> servicesFromAVehicle  = null;
+                Dao<Vehicle> dao = new GenericDao<Vehicle>(session, false, Vehicle.class);
+                List<Vehicle> vehicles = dao.all();
+                for (i=0; i<vehicles.size(); i++){
+                     servicesFromAVehicle = vehicles.get(i).getServices();
+                     for (j=0; j<servicesFromAVehicle.size(); j++){
+                         abstractTable.add(servicesFromAVehicle.get(j));
+                     }
+                }
 
-            if(v == null){
-                JOptionPane.showMessageDialog(this, "Veículo não encontrado!");
-                return;
             }
+            else{
+                VehicleDao dao = new VehicleDao(session, false);
+                Vehicle v = dao.getVehiclePerPlaque(plaque);
+
+                if(v == null){
+                    JOptionPane.showMessageDialog(this, "Veículo não encontrado!");
+                    return;
+                }
 
 
-            int i;
-            List<Service> services = v.getServices();
-            if (services.size() <= 0) {
-                JOptionPane.showMessageDialog(null, "Não há serviços cadastrados para este veículo!!!");
-            } else {
-                for (i = 0; i < services.size(); i++) {
-                    services.get(i).setVehicle(v);
-                    System.out.println(services.get(i).getOwner().getName());
-                    abstractTable.add(services.get(i));
+                List<Service> services = v.getServices();
+                if (services.size() <= 0) {
+                    JOptionPane.showMessageDialog(null, "Não há serviços cadastrados para este veículo!!!");
+                } else {
+                    for (i = 0; i < services.size(); i++) {
+                        services.get(i).setVehicle(v);
+                        System.out.println(services.get(i).getOwner().getName());
+                        abstractTable.add(services.get(i));
+                    }
                 }
             }
 

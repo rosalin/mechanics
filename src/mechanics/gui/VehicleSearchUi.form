@@ -40,13 +40,13 @@
               <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <EmptySpace min="12" pref="12" max="12" attributes="0"/>
-                  <Component id="jScrollPane1" pref="751" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="760" max="32767" attributes="0"/>
                   <EmptySpace min="12" pref="12" max="12" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton2" min="-2" pref="83" max="-2" attributes="0"/>
-                  <EmptySpace pref="680" max="32767" attributes="0"/>
+                  <EmptySpace pref="689" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -106,6 +106,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Localizar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

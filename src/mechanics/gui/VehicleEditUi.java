@@ -42,7 +42,6 @@ public class VehicleEditUi extends javax.swing.JDialog {
         vehicleController = new VehicleController();
         vehicleController.setUi(this);
         vehicleController.initialize();
-
     }
 
     /** This method is called from within the constructor to
@@ -496,9 +495,4 @@ public class VehicleEditUi extends javax.swing.JDialog {
     public void setVehicleController(VehicleController vehicleController) {
         this.vehicleController = vehicleController;
     }
-
-   
-
-
-
 }

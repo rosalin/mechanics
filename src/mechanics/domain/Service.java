@@ -5,6 +5,7 @@
 
 package mechanics.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -15,6 +16,7 @@ public class Service {
     private Long id;
     private String description;
     private long km;
+    private double price;
     private Vehicle vehicle;
     //private DateTime data_servico
     private Person owner;
@@ -24,7 +26,7 @@ public class Service {
     public Service(){}
 
     public Vehicle getVehicle() {
-        return vehicle;
+        return this.vehicle;
     }
 
     public void setVehicle(Vehicle vehicle) {
@@ -64,6 +66,14 @@ public class Service {
         this.km = km;
     }
 
+    public double getPrice(){
+        return price;
+    }
+
+    public void setPrice(double  price){
+        this.price = price;
+    }
+
     public Person getOwner() {
         return owner;
     }
@@ -71,7 +81,4 @@ public class Service {
     public void setOwner(Person owner) {
         this.owner = owner;
     }
-
-
-    
 }
