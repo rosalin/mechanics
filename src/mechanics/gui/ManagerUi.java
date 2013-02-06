@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 import mechanics.domain.Person;
@@ -88,6 +89,7 @@ public class ManagerUi extends javax.swing.JFrame {
             jButtonaAddService = new javax.swing.JButton();
             jLabel8 = new javax.swing.JLabel();
             jTextFieldPrice = new javax.swing.JTextField();
+            jLabel11 = new javax.swing.JLabel();
             jLabel7 = new javax.swing.JLabel();
             jMenuBar1 = new javax.swing.JMenuBar();
             jMenu1 = new javax.swing.JMenu();
@@ -129,7 +131,7 @@ public class ManagerUi extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabelOwner, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(268, Short.MAX_VALUE))
+                    .addContainerGap(28, Short.MAX_VALUE))
             );
             jPanel2Layout.setVerticalGroup(
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +174,7 @@ public class ManagerUi extends javax.swing.JFrame {
                     .addComponent(jButtonSearch)
                     .addGap(18, 18, 18)
                     .addComponent(jLabelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(420, Short.MAX_VALUE))
+                    .addContainerGap(409, Short.MAX_VALUE))
             );
             jPanel3Layout.setVerticalGroup(
                 jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,7 +227,7 @@ public class ManagerUi extends javax.swing.JFrame {
                     .addComponent(jComboBoxPersons, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jButtonUpdateClients, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(20, Short.MAX_VALUE))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
             jPanel5Layout.setVerticalGroup(
                 jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,29 +261,36 @@ public class ManagerUi extends javax.swing.JFrame {
                 jTextFieldPriceActionPerformed(evt);
             }
         });
+        jTextFieldPrice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldPriceKeyTyped(evt);
+            }
+        });
+
+        jLabel11.setText("R$");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonaAddService, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5)
-                            .addComponent(jScrollPane1)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonaAddService, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel8))
+                        .addComponent(jLabel6)
+                        .addGap(3, 3, 3)
+                        .addComponent(jFormattedTextFieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldPrice)
-                            .addComponent(jFormattedTextFieldDate, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))))
-                .addContainerGap(61, Short.MAX_VALUE))
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,16 +301,16 @@ public class ManagerUi extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jFormattedTextFieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jFormattedTextFieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
+                    .addComponent(jLabel11)
                     .addComponent(jTextFieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(jButtonaAddService, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addComponent(jButtonaAddService, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -315,14 +324,12 @@ public class ManagerUi extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(58, 58, 58))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(183, 183, 183)))
-                        .addContainerGap())))
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(195, 195, 195))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -364,7 +371,7 @@ public class ManagerUi extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -472,6 +479,7 @@ public class ManagerUi extends javax.swing.JFrame {
             jTextFieldKm.setBackground(new Color(242, 241, 240));
             jTextFieldKm.setText("");
             jTextAreaDescription.setText("");
+            jTextFieldPrice.setText("");
             jTextFieldPlaque.requestFocus();
 
             JOptionPane.showMessageDialog(this, "Serviço Cadastrado", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
@@ -506,6 +514,13 @@ public class ManagerUi extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldPriceActionPerformed
 
+    private void jTextFieldPriceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPriceKeyTyped
+        String caracteres="0987654321.";
+        if(!caracteres.contains(evt.getKeyChar()+"")){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldPriceKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -527,6 +542,7 @@ public class ManagerUi extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jFormattedTextFieldDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

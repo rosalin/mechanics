@@ -130,6 +130,7 @@ public class ServiceEditUi extends javax.swing.JDialog {
             jFormattedTextFieldDate = new javax.swing.JFormattedTextField(mfDate);
             jLabel11 = new javax.swing.JLabel();
             jTextFieldPriceEdit = new javax.swing.JTextField();
+            jLabel12 = new javax.swing.JLabel();
             jButtonaEdit = new javax.swing.JButton();
             jButtonaSave = new javax.swing.JButton();
             jButton1 = new javax.swing.JButton();
@@ -204,7 +205,14 @@ public class ServiceEditUi extends javax.swing.JDialog {
                     jTextFieldPriceEditActionPerformed(evt);
                 }
             });
+            jTextFieldPriceEdit.addKeyListener(new java.awt.event.KeyAdapter() {
+                public void keyTyped(java.awt.event.KeyEvent evt) {
+                    jTextFieldPriceEditKeyTyped(evt);
+                }
+            });
             jTextFieldPriceEdit.setEditable(false);
+
+            jLabel12.setText("R$");
 
             javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
             jPanel6.setLayout(jPanel6Layout);
@@ -225,8 +233,11 @@ public class ServiceEditUi extends javax.swing.JDialog {
                         .addComponent(jLabel11))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jComboBoxPersons, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextFieldPriceEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addComponent(jLabel12)
+                            .addGap(2, 2, 2)
+                            .addComponent(jTextFieldPriceEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jComboBoxPersons, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(331, Short.MAX_VALUE))
             );
             jPanel6Layout.setVerticalGroup(
@@ -243,7 +254,8 @@ public class ServiceEditUi extends javax.swing.JDialog {
                         .addComponent(jFormattedTextFieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel8)
                         .addComponent(jLabel11)
-                        .addComponent(jTextFieldPriceEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldPriceEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel12))
                     .addContainerGap())
             );
 
@@ -455,33 +467,32 @@ public class ServiceEditUi extends javax.swing.JDialog {
             Date date = formatter.parse(jFormattedTextFieldDate.getText());
             String km = jTextFieldKm.getText();
             String desc = jTextAreaDescription.getText();
+            String price = jTextFieldPriceEdit.getText();
             Person person = (Person) jComboBoxPersons.getSelectedItem();
 
             service.setCreatedAt(date);
 
             long kmConverted = Long.valueOf(km);
+            double priceConverted = Double.valueOf(price);
 
             service.setKm(kmConverted);
             service.setDescription(desc);
             service.setOwner(person);
-        
-
-
+            service.setPrice(priceConverted);
+       
             Session session = HibernateUtil.getCurrentSession();
             if (!session.isOpen()) {
                 session = HibernateUtil.getSessionFactory().openSession();
                 HibernateUtil.setCurrentSession(session);
             }
 
+            System.out.println("veiculooooooooooooooo: " + service.getVehicle());
             Dao<Vehicle> dao = new GenericDao<Vehicle>(session, false, Vehicle.class);
             dao.saveOrUpdate(service.getVehicle());
             JOptionPane.showMessageDialog(this, "Serviço atualizado com sucesso!!!");
 
         } catch (ParseException ex) {
-            System.out.println("Erroooooooooooooooooooooooo!!!");
             Logger.getLogger(ServiceEditUi.class.getName()).log(Level.SEVERE, null, ex);
-
-
         } catch (HibernateException e) {
             JOptionPane.showMessageDialog(this, "Occoreu um erro inesperado! " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -529,6 +540,7 @@ public class ServiceEditUi extends javax.swing.JDialog {
         GerarRelatorio gerarRelatorio = new GerarRelatorio();
         try {
             GerarRelatorio.gerarRelatorio(SampleJRDataSourceFactory.createDataSource(this.service));
+            System.out.println("Tetse" + service.getId());
         } catch (JRException ex) {
             Logger.getLogger(ServiceEditUi.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -546,6 +558,13 @@ public class ServiceEditUi extends javax.swing.JDialog {
     private void jFormattedTextFieldDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldDateActionPerformed
+
+    private void jTextFieldPriceEditKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPriceEditKeyTyped
+        String caracteres="0987654321.";
+        if(!caracteres.contains(evt.getKeyChar()+"")){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldPriceEditKeyTyped
     /**
      * @param args the command line arguments
      */
@@ -584,6 +603,7 @@ public class ServiceEditUi extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

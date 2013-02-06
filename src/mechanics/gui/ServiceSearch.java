@@ -208,7 +208,7 @@ public class ServiceSearch extends javax.swing.JDialog {
         int i, j;
         abstractTable.clear();
         Session session = HibernateUtil.getSessionFactory().openSession();
-        //HibernateUtil.setCurrentSession(session);
+        HibernateUtil.setCurrentSession(session);
 
         try {
             String plaque = jTextFieldPlaque.getText();

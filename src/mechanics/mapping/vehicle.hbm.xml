@@ -3,7 +3,6 @@
 <hibernate-mapping>
     <class name="mechanics.domain.Vehicle"
     table="mechanics_vehicle">
-
         
         <id
             name="id"

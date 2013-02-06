@@ -1,79 +1,157 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ServiceReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7dec4799-22f4-44c6-a22e-23dca34a31a8">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ServiceReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7dec4799-22f4-44c6-a22e-23dca34a31a8">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#BFDFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#E6F2FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="0bcf83c9-1972-46cd-80c7-30f010389645"/>
+	<subDataset name="Table Dataset 2" uuid="03cf6b44-fbc4-4776-84db-5ea603dd86e9"/>
 	<field name="DESCRIPTION" class="java.lang.String"/>
 	<field name="KM" class="java.lang.String"/>
 	<field name="CREATEDAT" class="java.lang.String"/>
 	<field name="OWNER" class="java.lang.String"/>
+	<field name="PRICE" class="java.lang.String"/>
+	<field name="PLACA" class="java.lang.String"/>
+	<field name="MARCA" class="java.lang.String"/>
+	<field name="MODELO" class="java.lang.String"/>
+	<field name="COR" class="java.lang.String"/>
+	<field name="ANO" class="java.lang.String"/>
+	<field name="ID" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="74" splitType="Stretch">
+			<image>
+				<reportElement uuid="e3b09954-78ea-4f59-a407-4aa85c421937" x="30" y="-15" width="101" height="89"/>
+				<imageExpression><![CDATA["/home/rodrigo/Willian/Car-Repair-Blue-icon.png"]]></imageExpression>
+			</image>
 			<staticText>
-				<reportElement uuid="cc08aa7c-6f7e-4c79-9d83-75df1d15ef7c" x="64" y="11" width="397" height="28"/>
-				<textElement textAlignment="Center">
-					<font size="18" isBold="true"/>
+				<reportElement uuid="0ac7d060-7d7e-4e23-8ebb-701ed0063c30" x="131" y="0" width="154" height="18"/>
+				<textElement>
+					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Relatório de serviço prestado]]></text>
+				<text><![CDATA[CRISMAR AUTO MECANICA]]></text>
 			</staticText>
-			<textField evaluationTime="Report" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="false">
-				<reportElement uuid="1505028b-53f0-45a3-b286-ac6716c3bb29" x="227" y="39" width="131" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[ new Date()]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement uuid="6748a85d-33e0-4f69-bdcb-595f9f65a7d6" x="154" y="39" width="73" height="17"/>
+				<reportElement uuid="41096b16-8e1c-43a5-a50e-8aa3f26b943b" x="131" y="18" width="242" height="18"/>
 				<textElement/>
-				<text><![CDATA[impresso em:]]></text>
+				<text><![CDATA[Av. Pres. Vargas, 342 - Labienópolis]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dd665cbe-63c5-44db-b255-96c91956a7b1" x="131" y="36" width="136" height="18"/>
+				<textElement/>
+				<text><![CDATA[17400-000 - Garça - SP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2625b60b-d03b-445e-82e6-be10f6a9e384" x="131" y="54" width="136" height="18"/>
+				<textElement/>
+				<text><![CDATA[Telefone: (14) 3471-3713]]></text>
 			</staticText>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="48" splitType="Stretch">
 			<line>
-				<reportElement uuid="b65607ba-d28d-4fee-a353-d23b6f47d18d" x="0" y="31" width="555" height="1"/>
+				<reportElement uuid="b65607ba-d28d-4fee-a353-d23b6f47d18d" x="0" y="31" width="802" height="1"/>
 			</line>
 			<staticText>
-				<reportElement uuid="a42db1cb-00b7-42f8-b55e-b52ab4995600" x="0" y="11" width="136" height="20"/>
+				<reportElement uuid="a42db1cb-00b7-42f8-b55e-b52ab4995600" x="30" y="12" width="136" height="20"/>
 				<textElement>
 					<font size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
 				</textElement>
-				<text><![CDATA[Dados do serviço:]]></text>
+				<text><![CDATA[Dados do Serviço ]]></text>
 			</staticText>
 			<line>
-				<reportElement uuid="d429fc40-697b-4858-85fd-e3591d34fc8e" x="0" y="10" width="555" height="1"/>
+				<reportElement uuid="d429fc40-697b-4858-85fd-e3591d34fc8e" x="0" y="10" width="802" height="1"/>
 			</line>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="146" splitType="Stretch">
+		<band height="164" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="d7aa0826-9a74-4866-8623-691145aa188c" x="0" y="20" width="136" height="20"/>
+				<reportElement uuid="d7aa0826-9a74-4866-8623-691145aa188c" x="0" y="0" width="149" height="20"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Descrição do serviço:]]></text>
+				<text><![CDATA[Descrição do serviço]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="ee40397e-5c13-4b2d-88da-fa405caeb472" x="0" y="50" width="136" height="20"/>
+				<reportElement uuid="ee40397e-5c13-4b2d-88da-fa405caeb472" x="149" y="0" width="136" height="20" backcolor="#CCCCCC"/>
 				<box rightPadding="0"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Kilometragem atual:]]></text>
+				<text><![CDATA[Kilometragem atual]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="dc1ac8aa-3e57-44bd-8014-933ea1672f8d" x="0" y="80" width="41" height="20"/>
+				<reportElement uuid="dc1ac8aa-3e57-44bd-8014-933ea1672f8d" x="388" y="0" width="135" height="20" backcolor="#CCCCCC"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Data: ]]></text>
+				<text><![CDATA[Data]]></text>
 			</staticText>
 			<textField pattern="">
-				<reportElement uuid="6a49082f-627b-41b0-8873-d752b56ed149" x="136" y="20" width="419" height="20"/>
+				<reportElement uuid="6a49082f-627b-41b0-8873-d752b56ed149" x="0" y="20" width="149" height="58"/>
 				<box leftPadding="3"/>
 				<textElement>
 					<font size="12"/>
@@ -81,7 +159,7 @@
 				<textFieldExpression><![CDATA[$F{DESCRIPTION}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="183cfbb0-6853-4763-9d48-2c14156285bd" x="136" y="50" width="419" height="20"/>
+				<reportElement uuid="183cfbb0-6853-4763-9d48-2c14156285bd" x="149" y="20" width="136" height="20"/>
 				<box leftPadding="3"/>
 				<textElement>
 					<font size="12"/>
@@ -89,36 +167,152 @@
 				<textFieldExpression><![CDATA[$F{KM}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement uuid="b582726d-6b52-46d7-9fbb-15ef0867e1da" x="41" y="80" width="514" height="20"/>
+				<reportElement uuid="b582726d-6b52-46d7-9fbb-15ef0867e1da" x="388" y="20" width="135" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{CREATEDAT}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="aa041c51-1a3b-4dfd-b397-9bc6ebe04f1b" x="0" y="113" width="85" height="20"/>
+				<reportElement uuid="aa041c51-1a3b-4dfd-b397-9bc6ebe04f1b" x="523" y="0" width="78" height="20" backcolor="#CCCCCC"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Proprietário:]]></text>
+				<text><![CDATA[Proprietário]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="08e4134e-21f6-4279-98d8-697a5c82d7eb" x="85" y="113" width="470" height="20"/>
+				<reportElement uuid="08e4134e-21f6-4279-98d8-697a5c82d7eb" x="523" y="20" width="247" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{OWNER}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement uuid="bcda6748-d4e9-474a-97f5-f59b2f384ff9" x="285" y="0" width="103" height="20" backcolor="#CCCCCC"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Preço]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="c418f19f-7cb7-4799-91a8-6e6d3c45c694" x="303" y="20" width="85" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PRICE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="d94032a4-2775-448b-b4fd-c91d5c38e1bc" x="285" y="20" width="18" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[R$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6c96233f-5fa7-4906-a6e4-1d14dc0b0e27" x="30" y="78" width="136" height="20"/>
+				<textElement>
+					<font size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Dados do veículo]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="47fa971a-3d2b-46ab-bd34-b484b2aea50f" x="0" y="98" width="802" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="424796fb-c639-4800-83c2-46082aeb5693" x="0" y="111" width="97" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Placa]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="7625ac18-63bf-44de-a78e-ed2d970f8bc4" x="0" y="131" width="97" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PLACA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="551380eb-63d1-4f3c-85e5-5d6e0f1692da" x="97" y="111" width="134" height="20"/>
+				<box rightPadding="0"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marca]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="2d8d4c23-4ae9-41d7-a6c6-f03d3cbc489c" x="97" y="131" width="134" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MARCA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="1528ce05-724a-4558-910d-ce9547020e24" x="231" y="111" width="149" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Modelo]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="bcd8a698-a5ad-426c-b7d3-f41705170919" x="231" y="131" width="149" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MODELO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="bcaed6ca-b3c0-4a38-a611-e39f868d5c5a" x="380" y="111" width="143" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ano]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="01992cff-8669-4454-b2aa-3d0faf43d2e3" x="380" y="131" width="143" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ANO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e4509104-3686-4e5d-a9bc-fb9d0c060727" x="523" y="111" width="31" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cor]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="c6ab24af-691e-45e0-89c8-5d70ad18bea7" x="523" y="131" width="297" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COR}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="90e84429-e3d1-4af7-a04d-9c279883fdac" x="0" y="77" width="802" height="1"/>
+			</line>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="244" splitType="Stretch"/>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="6748a85d-33e0-4f69-bdcb-595f9f65a7d6" x="657" y="37" width="73" height="17"/>
+				<textElement/>
+				<text><![CDATA[impresso em:]]></text>
+			</staticText>
+			<textField evaluationTime="Report" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="false">
+				<reportElement uuid="1505028b-53f0-45a3-b286-ac6716c3bb29" x="730" y="37" width="72" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>

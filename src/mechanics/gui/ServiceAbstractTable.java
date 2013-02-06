@@ -16,7 +16,7 @@ import mechanics.domain.Service;
 public class ServiceAbstractTable extends AbstractTableModel {
 
     private ArrayList<Service> services =  new ArrayList<Service>();
-    private String[] columns = {"Data da execução","Descrição", "Km", "Proprietário" };
+    private String[] columns = {"Data da execução","Descrição", "Km", "Preço", "Proprietário" };
 
     public int getRowCount() {
         return services.size();
@@ -55,6 +55,8 @@ public class ServiceAbstractTable extends AbstractTableModel {
             case 2:
                 return service.getKm();
             case 3:
+                return "R$ " + service.getPrice();
+            case 4:
                 return service.getOwner().getName();
             default:
                 return null;

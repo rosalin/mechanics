@@ -171,8 +171,12 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jComboBoxPersons" min="-2" pref="265" max="-2" attributes="1"/>
-                              <Component id="jTextFieldPriceEdit" min="-2" pref="108" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldPriceEdit" min="-2" pref="90" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jComboBoxPersons" alignment="0" min="-2" pref="265" max="-2" attributes="1"/>
                           </Group>
                           <EmptySpace pref="331" max="32767" attributes="0"/>
                       </Group>
@@ -194,6 +198,7 @@
                               <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jTextFieldPriceEdit" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -255,10 +260,16 @@
                 <Component class="javax.swing.JTextField" name="jTextFieldPriceEdit">
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldPriceEditActionPerformed"/>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldPriceEditKeyTyped"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="jTextFieldPriceEdit.setEditable(false);"/>
                   </AuxValues>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel12">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="R$"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

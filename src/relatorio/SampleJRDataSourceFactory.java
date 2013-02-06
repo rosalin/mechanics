@@ -27,6 +27,4 @@ public class SampleJRDataSourceFactory{
         }
         return data;
     }
-
-
 }

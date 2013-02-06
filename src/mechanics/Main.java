@@ -14,8 +14,6 @@ import mechanics.domain.Vehicle;
 import mechanics.persistence.Dao;
 import mechanics.persistence.GenericDao;
 import mechanics.persistence.HibernateUtil;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
